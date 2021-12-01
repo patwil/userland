@@ -133,5 +133,5 @@ unset(KHRONOS_EGL_PLATFORM CACHE)
 
 # Uncomment to enable workaround for crash when
 # thread containing SDL_CreateWindow() exits
-#add_definitions(-DRPI_VIDEO_DRIVER)
+add_definitions(-DRPI_VIDEO_DRIVER)
 
