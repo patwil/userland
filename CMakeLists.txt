@@ -55,6 +55,10 @@ add_definitions(-D_GNU_SOURCE)
 add_definitions(-D__VIDEOCORE4__)
 add_definitions(-DTV_SUPPORTED_MODE_NO_DEPRECATED)
 
+# Uncomment to enable workaround for crash when
+# thread containing SDL_CreateWindow() exits
+add_definitions(-DSDL_THREAD_EGL_UNLOAD_WORKAROUND)
+
 # add_definitions(-DKHRONOS_CLIENT_LOGGING)
 
 # Check for OpenWF-C value set via command line
@@ -130,8 +134,4 @@ if(PKG_CONFIG_FOUND)
 endif()
 # Remove cache entry, if one added by command line
 unset(KHRONOS_EGL_PLATFORM CACHE)
-
-# Uncomment to enable workaround for crash when
-# thread containing SDL_CreateWindow() exits
-add_definitions(-DRPI_VIDEO_DRIVER)
 

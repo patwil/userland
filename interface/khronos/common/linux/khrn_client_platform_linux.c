@@ -128,7 +128,7 @@ void platform_hint_thread_finished()
    /*
       todo: should we do this:   Yes, to stop crashes with SDL RPI video driver
    */
-#ifdef RPI_VIDEO_DRIVER
+#ifdef SDL_THREAD_EGL_UNLOAD_WORKAROUND
       vcos_thread_deregister_at_exit(client_thread_detach, NULL);
       client_thread_detach(NULL);
 #endif

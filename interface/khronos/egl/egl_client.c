@@ -309,7 +309,7 @@ EGLAPI EGLBoolean EGLAPIENTRY eglInitialize(EGLDisplay dpy, EGLint *major, EGLin
 EGLAPI EGLBoolean EGLAPIENTRY eglTerminate(EGLDisplay dpy)
 {
    CLIENT_THREAD_STATE_T *thread = CLIENT_GET_THREAD_STATE();
-#ifdef RPI_VIDEO_DRIVER
+#ifdef SDL_THREAD_EGL_UNLOAD_WORKAROUND
    bool destroy = false;
 #endif
    vcos_log_trace("eglTerminate start. dpy=%d", (int)dpy);
@@ -331,7 +331,7 @@ EGLAPI EGLBoolean EGLAPIENTRY eglTerminate(EGLDisplay dpy)
             result = EGL_TRUE;
 
             client_try_unload_server(process);
-#ifdef RPI_VIDEO_DRIVER
+#ifdef SDL_THREAD_EGL_UNLOAD_WORKAROUND
             destroy = true;
 #endif
          } else
@@ -340,7 +340,7 @@ EGLAPI EGLBoolean EGLAPIENTRY eglTerminate(EGLDisplay dpy)
 
       CLIENT_UNLOCK();
 
-#ifdef RPI_VIDEO_DRIVER
+#ifdef SDL_THREAD_EGL_UNLOAD_WORKAROUND
       if (destroy) {
          platform_hint_thread_finished();
       }

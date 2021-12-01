@@ -581,7 +581,7 @@ extern VCOS_STATUS_T vcos_thread_at_exit(void (*pfn)(void*), void *cxt)
    return VCOS_ENOSPC;
 }
 
-#ifdef RPI_VIDEO_DRIVER
+#ifdef SDL_THREAD_EGL_UNLOAD_WORKAROUND
 extern VCOS_STATUS_T vcos_thread_deregister_at_exit(void (*pfn)(void*), void *cxt)
 {
    int i;
