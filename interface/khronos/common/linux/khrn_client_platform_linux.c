@@ -126,13 +126,12 @@ void *platform_tls_get_check(PLATFORM_TLS_T tls)
 void platform_hint_thread_finished()
 {
    /*
-      todo: should we do this:
-
-      vcos_thread_deregister_at_exit(client_thread_detach);
-      client_thread_detach();
-
-      here?
+      todo: should we do this:   Yes, to stop crashes with SDL RPI video driver
    */
+#ifdef RPI_VIDEO_DRIVER
+      vcos_thread_deregister_at_exit(client_thread_detach, NULL);
+      client_thread_detach(NULL);
+#endif
 }
 
 #ifndef KHRN_PLATFORM_VCOS_NO_MALLOC

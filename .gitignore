@@ -30,3 +30,8 @@ build/
 *.pts
 *.ppm
 *.mkv
+*.vpj
+*.vpw
+*.vpwhistu
+*.vtg
+

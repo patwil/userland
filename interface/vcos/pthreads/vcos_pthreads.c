@@ -581,6 +581,30 @@ extern VCOS_STATUS_T vcos_thread_at_exit(void (*pfn)(void*), void *cxt)
    return VCOS_ENOSPC;
 }
 
+#ifdef RPI_VIDEO_DRIVER
+extern VCOS_STATUS_T vcos_thread_deregister_at_exit(void (*pfn)(void*), void *cxt)
+{
+   int i;
+   VCOS_THREAD_T *self = vcos_thread_current();
+   vcos_unused(cxt);
+   if (!self)
+   {
+      vcos_assert(0);
+      return VCOS_EINVAL;
+   }
+   for (i=0; i<VCOS_MAX_EXIT_HANDLERS; i++)
+   {
+      if (self->at_exit[i].pfn == pfn)
+      {
+         self->at_exit[i].pfn = NULL;
+         self->at_exit[i].cxt = NULL;
+         return VCOS_SUCCESS;
+      }
+   }
+   return VCOS_SUCCESS;
+}
+#endif
+
 void vcos_set_args(int argc, const char **argv)
 {
    vcos_argc = argc;

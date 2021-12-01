@@ -130,3 +130,8 @@ if(PKG_CONFIG_FOUND)
 endif()
 # Remove cache entry, if one added by command line
 unset(KHRONOS_EGL_PLATFORM CACHE)
+
+# Uncomment to enable workaround for crash when
+# thread containing SDL_CreateWindow() exits
+#add_definitions(-DRPI_VIDEO_DRIVER)
+
